@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    HOME
+    <p>{{ name }} - {{ job }}</p>
+    <button @click="clicked">Tıkla</button>
   </div>
 </template>
 
@@ -13,11 +14,16 @@ export default {
   components: {
   },
   setup(){
-    console.log("Setup Yüklendi");
-    //Component oluşmadan önceki durum.İlk oluşturma aşamasında created'dan da önce çalışıyor.
-    onMounted(() => {
-      console.log("Mounted setup içerisinde çalıştırıldı.");
-    })
-  },
-}
+    let name="Şahin"
+    let job = "Software Developer"
+
+    const clicked = () => {
+      console.log("Butona Tıklandı");
+    }
+
+
+    return {name,job,clicked}; 
+    //Burada tanımlı dataları yukarıda kullanabilmek için return etmem gerekmektedir.Bunlar metot olsa dahi return etmem gerekmektedir.
+    }
+  }
 </script>
