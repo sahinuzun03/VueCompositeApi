@@ -1,18 +1,23 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    HOME
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+//Setup içerisinde çağırmak için kullandık.
+import { onMounted } from 'vue';
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
-  }
+  },
+  setup(){
+    console.log("Setup Yüklendi");
+    //Component oluşmadan önceki durum.İlk oluşturma aşamasında created'dan da önce çalışıyor.
+    onMounted(() => {
+      console.log("Mounted setup içerisinde çalıştırıldı.");
+    })
+  },
 }
 </script>
