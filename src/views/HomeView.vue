@@ -1,10 +1,9 @@
 <template>
   <div class="home">
     <p>{{ name }} - {{ job }}</p>
-
-    <p ref="info">Deneme</p>
-    <!-- yukarıda ki p tagi komple benim info.value'nun değeri olmuş oldu. -->
     <button @click="clicked">Tıkla</button>
+    <input type="text" v-model="name"> 
+    <!-- Burada v-model name olarak direk bağlayabilirim name.value dememe gerek yoktur. -->
   </div>
 </template>
 
@@ -19,19 +18,14 @@ export default {
   components: {
   },
   setup(){
-    let name="Şahin"
-    let job = "Software Developer"
 
-    const info = ref(null);//bir fonksiyon ilk değer olarak null veriyorum
-
-    //Bu info'yu yukarıda bir yerde kullanacaksam bunu return etmem gerekiyor eğer yukarıda bir yerde kullanmayacaksam eğer return etmeme gerek yoktur.
+    let name = ref("Varol");
 
     const clicked = () => {
-      // console.log("Butona Tıklandı");
-
-      console.log(info , info.value);
+      name.value = "Deneme Click" //Değiştirmek için name'in value değerini değiştirmem lazım
+      console.log(name);
     }
-    return {name,job,clicked,info}; 
+    return {name,clicked}; 
     }
   }
 </script>
