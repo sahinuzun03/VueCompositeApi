@@ -1,31 +1,31 @@
 <template>
   <div class="home">
-    <p>{{ name }} - {{ job }}</p>
-    <button @click="clicked">Tıkla</button>
-    <input type="text" v-model="name"> 
-    <!-- Burada v-model name olarak direk bağlayabilirim name.value dememe gerek yoktur. -->
+    <input type="text" v-model="search">
+    <div v-for="day in finded" :key="day">
+      {{ day }}
+    </div>
   </div>
 </template>
 
 <script>
 //Setup içerisinde çağırmak için kullandık.
-import { ref } from 'vue';
+import { ref,computed } from 'vue';
+
 
 //ref referans bir değer oluşturmak için kullanıyoruz
 
 export default {
   name: 'HomeView',
-  components: {
-  },
+  components: {},
   setup(){
+    const days = ref(["Pazartesi","Sali","Çarşamba","Perşembe","Cuma"]);
 
-    let name = ref("Varol");
+    const search = ref("");
+    const finded = computed(() => {
+      return days.value.filter((day) => day.includes(search.value))
+    })
 
-    const clicked = () => {
-      name.value = "Deneme Click" //Değiştirmek için name'in value değerini değiştirmem lazım
-      console.log(name);
-    }
-    return {name,clicked}; 
+    return {days,search,finded}
     }
   }
 </script>
