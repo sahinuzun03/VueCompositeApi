@@ -10,32 +10,32 @@
 </template>
 
 <script>
-import { log } from 'console';
 import { ref } from 'vue';
+import getContentsFetch from '../composables/getContentsFetch';
+import {useRoute,useRouter} from 'vue-router'
 export default {
-    props:['contents'],
     setup(){
-        const contents = ref([]);
-        const err = ref(null);
-        const getContents = async () => {
-            let data = await fetch('https://jsonplaceholder.typicode.com/posts');
-            contents.value = await data.json();
+        const route = useRoute();
+        const router = useRouter();
 
-            try {
-                if(!data.ok){
-                throw new Error('Verilere Erişilemedi!!!"')
-            }
-            } catch (error) {
-                err.value = error.message;
-            }
-        }
+        //route : route ile gönderilen parametreleri göndermek için kullanılır
+        console.log('Route :' , route);
 
-        getContents();
-        return {contents,err}
+        //router : route içerisindeki metotlar gelir ileri git geri git.
+        console.log('Router : ' , router);
+        
+
+
+
+
+        //Aşağıdaki tanımlamaların hepsinin getContentFetch içerisinden geleceğini söyledim.
+        const {contents,err,getContents} = getContentsFetch();
+        getContents();//Yukarıdaki tanımlamayı kullanmış oldum
+        return {contents,err} //Bunlarıda zaten yukarıdan kullanmış oldum
     }
 }
 </script>
 
 <style>
-
+/* Composoble dosya yukarıda yazdığım kodu süreli çağırıp çağırıp kullanmak istediğim zaman çağırdığımız dosya yapısını ifade etmektedir.Yukarıdaki kod components gibi bir yapı haline getireceğiz. */
 </style>
