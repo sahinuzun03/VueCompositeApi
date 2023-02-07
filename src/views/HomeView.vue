@@ -1,42 +1,28 @@
 <template>
   <div class="home">
-    <input type="text" v-model="search">
-    <div v-for="day in finded" :key="day">
-      {{ day }}
-    </div>
+    <Contents :contents="contents"></Contents>
+    <!-- contents'e prop gönderdik -->
   </div>
 </template>
 
 <script>
 //Setup içerisinde çağırmak için kullandık.
 import { ref,computed,watch,watchEffect } from 'vue';
-
+import Contents from '../components/Content.vue'
 
 //ref referans bir değer oluşturmak için kullanıyoruz
 
 export default {
   name: 'HomeView',
+  components:{Contents},
 
   setup(){
-    const days = ref(["Pazartesi","Sali","Çarşamba","Perşembe","Cuma"]);
+    const contents = ref([
+      {id:1,title:'Deneme 1',details:'Detail 1 '},{id:1,title:'Deneme 2',details:'Detail 2 '},
+      {id:1,title:'Deneme 3',details:'Detail 3 '},
+      {id:1,title:'Deneme 4',details:'Detail 4 '}]);
 
-    const search = ref("");
-    const finded = computed(() => {
-      return days.value.filter((day) => day.includes(search.value))
-    })
-
-    //search değiştikçe watch çalışmaya başladı
-    const watchStop = watch(search,() => {
-      console.log("watch çalıştı");
-    })
-
-    //Wathceffec hiçbir şey olmadanda bir kere çalıştı.
-    const watchEffectStop = watchEffect(() => {
-      console.log("watcheffect çalıştı",days.value);
-      console.log("watcheffect çalıştı",search.value);
-    });
-
-    return {days,search,finded}
+      return {contents}
     }
   }
 </script>
